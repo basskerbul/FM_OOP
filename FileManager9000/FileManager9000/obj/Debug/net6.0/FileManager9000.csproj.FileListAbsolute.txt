@@ -1,0 +1,17 @@
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\bin\Debug\net6.0\FileManager9000.exe
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\bin\Debug\net6.0\FileManager9000.deps.json
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\bin\Debug\net6.0\FileManager9000.runtimeconfig.json
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\bin\Debug\net6.0\FileManager9000.dll
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\bin\Debug\net6.0\FileManager9000.pdb
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.csproj.AssemblyReference.cache
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.Properties.Resources.resources
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.csproj.GenerateResource.cache
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.GeneratedMSBuildEditorConfig.editorconfig
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.AssemblyInfoInputs.cache
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.AssemblyInfo.cs
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.csproj.CoreCompileInputs.cache
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.dll
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\refint\FileManager9000.dll
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.pdb
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\FileManager9000.genruntimeconfig.cache
+C:\FMOOP\FM_OOP\FileManager9000\FileManager9000\obj\Debug\net6.0\ref\FileManager9000.dll
