@@ -56,11 +56,21 @@ interface ICopyAndTransfer
 interface IOutput
 {
     /// <summary>
-    /// Вывод информации на экран
+    /// Вывод дерева директорий
     /// </summary>
     /// <param name="values"></param>
     /// <param name="format"></param>
-    void Output(string[] values, string format);
+    void OutputTree(string[] folders, string[] files);
+    /// <summary>
+    /// Вывод информации о папке/файле
+    /// </summary>
+    /// <param name="values"></param>
+    int InformationOutput(string path);
+    /// <summary>
+    /// Вывод информационного сообщения
+    /// </summary>
+    /// <param name="message"></param>
+    void MessageOutput(string message);
 }
 interface IInput
 {
@@ -69,6 +79,61 @@ interface IInput
     /// </summary>
     /// <returns></returns>
     string Input();
+}
+
+class Interaction: IOutput
+{
+    static private string format = "║{0, -56}║";
+    static private string up_frame = "╔════════════════════════════════════════════════════════╗";
+    static private string down_frame = "╚════════════════════════════════════════════════════════╝";
+
+    public void OutputTree(string[] folders, string[] files)
+    {
+        Console.WriteLine(up_frame);
+        foreach(string folder in folders)
+        {
+            Console.WriteLine(format, folder);
+        }
+        foreach(string file in files)
+        {
+            Console.WriteLine(format, file);
+        }
+        Console.WriteLine();
+    }
+    public int InformationOutput(string path)
+    {
+        if (Directory.Exists(path))
+        {
+            Console.WriteLine("╔════════════════════════════════════════════════════════╗");
+            DirectoryInfo folder = new DirectoryInfo(path);
+            Console.WriteLine(format, $"{folder.Name}");
+            Console.WriteLine(format, $"{folder.FullName}");
+            Console.WriteLine(format, $"{folder.Attributes}");
+            Console.WriteLine(format, $"{folder.CreationTime}");
+            Console.WriteLine("╚════════════════════════════════════════════════════════╝");
+            return 0;
+        }
+        else if (File.Exists(path))
+        {
+            FileInfo file = new FileInfo(path);
+            Console.WriteLine(format, $"{file.Name}");
+            Console.WriteLine(format, $"{file.FullName}");
+            Console.WriteLine(format, $"{file.CreationTime}");
+            Console.WriteLine("╚════════════════════════════════════════════════════════╝");
+            return 0;
+        }
+        else
+        {
+            MessageOutput("Что-то пошло не так");
+            return -1;
+        }
+    }
+    public void MessageOutput(string message)
+    {
+        Console.WriteLine("╔════════════════════════════════════════════════════════╗");
+        Console.WriteLine(format, message);
+        Console.WriteLine("╚════════════════════════════════════════════════════════╝");
+    }
 }
 
 class Functions: ICreate, IDelete, IRename, ICopyAndTransfer
