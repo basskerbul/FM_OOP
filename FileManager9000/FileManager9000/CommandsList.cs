@@ -1,14 +1,10 @@
 ﻿interface ICommandRecognition
 {
     /// <summary>
-    /// Распознование простых команд пользователя
+    /// Распознает команды пользователя, вызывает нужный метод, вызывает окна
     /// </summary>
     /// <param name="command"></param>
-    void SimpleCommands(string command);
-    /// <summary>
-    /// Распознование составных команд
-    /// </summary>
-    void ComplexCommands(string command);
+    void List(string command);
 }
 
 class CommandsList: ICommandRecognition
@@ -24,34 +20,32 @@ class CommandsList: ICommandRecognition
         this.page = page;
     }
 
-    public void SimpleCommands(string command)
-    {
-        switch (command)
-        {
-            case "next":
-                Console.Clear();
-                interaction.OutputTree(path, page++);
-                interaction.InformationOutput(path);
-                break;
-            case "back":
-                Console.Clear();
-                interaction.OutputTree(path, page--);
-                interaction.InformationOutput(path);
-                break;
-            case "help":
-                Console.Clear();
-                interaction.CommandWindow();
-                break;
-            default:
-                ComplexCommands(command);
-                break;
-        }
-    }
-    public void ComplexCommands(string command)
+    public void List(string command)
     {
         string[] elements = command.Split(' ');
+
+        //Следующая страница
+        if (command == "next")
+        {
+            Console.Clear();
+            interaction.OutputTree(path, page++);
+            interaction.InformationOutput(path);
+        }
+        //Предыдущая страница
+        else if (command == "back")
+        {
+            Console.Clear();
+            interaction.OutputTree(path, page--);
+            interaction.InformationOutput(path);
+        }
+        //Вызывает список команд
+        else if (command == "help")
+        {
+            Console.Clear();
+            interaction.CommandWindow();
+        }
         //Переход по папкам
-        if (elements[0] == "cd")
+        else if (elements[0] == "cd")
         {
             if (elements[1] == "..")
             {
@@ -133,9 +127,12 @@ class CommandsList: ICommandRecognition
         {
             string[] files = command.Split('"');
             string origin_path = path + files[1];
+            string new_path = $@"{files[3]}\{files[1]}";
 
-            string to_path = path + files[1];
-            functions.Transfer(to_path, files[3] + files[1]);
+            functions.Transfer(origin_path, new_path);
+            Console.Clear();
+            interaction.OutputTree(path, page);
+            interaction.InformationOutput(new_path);
         }
         else
         {
