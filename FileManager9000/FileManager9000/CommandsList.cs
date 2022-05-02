@@ -86,12 +86,8 @@ class CommandsList: ICommandRecognition
         //Вызвать окно информации
         else if (elements[0] == "info")
         {
-            string file = "";
-            for (int i = 1; i < elements.Length; i++)
-            {
-                file += $"{elements[i]} ";
-            }
-            string new_path = $@"{path}{file}";
+            string[] file_name = command.Split('"');
+            string new_path = $@"{path}{file_name[1]}";
             Console.Clear();
             interaction.OutputTree(path, page);
             interaction.InformationOutput(new_path);

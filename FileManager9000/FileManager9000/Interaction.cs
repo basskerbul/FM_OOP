@@ -71,22 +71,31 @@ class Interaction: IOutput, IInput
     {
         if (Directory.Exists(path))
         {
+            CalculateSize calculateSize = new CalculateSize(path);
+
             DirectoryInfo folder = new DirectoryInfo(path);
+
             Console.WriteLine(format, "Information:");
             Console.WriteLine(format, $"{folder.Name}");
             Console.WriteLine(format, $"{folder.FullName}");
             Console.WriteLine(format, $"{folder.Attributes}");
             Console.WriteLine(format, $"{folder.CreationTime}");
+            if(path != @"C:\")
+                Console.WriteLine(format, $"{calculateSize.Size(path)} bytes");
             Console.WriteLine(down_frame);
             return 0;
         }
         else if (File.Exists(path))
         {
+            CalculateSize calculateSize = new CalculateSize(path);
+
             FileInfo file = new FileInfo(path);
+
             Console.WriteLine(format, "Information:");
             Console.WriteLine(format, $"{file.Name}");
             Console.WriteLine(format, $"{file.FullName}");
             Console.WriteLine(format, $"{file.CreationTime}");
+            Console.WriteLine(format, $"{calculateSize.Size(path)}");
             Console.WriteLine(down_frame);
             return 0;
         }
