@@ -11,8 +11,10 @@ class CommandsList: ICommandRecognition
 {
     private Interaction interaction = new Interaction();
     private Functions functions = new Functions();
+    private Search search = new Search();
     private string path;
-    private int page; 
+    private int page;
+    
 
     public CommandsList(string path, int page)
     {
@@ -23,6 +25,7 @@ class CommandsList: ICommandRecognition
     public void List(string command)
     {
         string[] elements = command.Split(' ');
+        string[] file_name = command.Split('"');
 
         //Следующая страница
         if (command == "next")
@@ -86,7 +89,6 @@ class CommandsList: ICommandRecognition
         //Вызвать окно информации
         else if (elements[0] == "info")
         {
-            string[] file_name = command.Split('"');
             string new_path = $@"{path}{file_name[1]}";
             Console.Clear();
             interaction.OutputTree(path, page);
@@ -95,13 +97,12 @@ class CommandsList: ICommandRecognition
         //Копирование и перенос папок/файлов
         else if (elements[0] == "copy")
         {
-            string[] files = command.Split('"');
-            string origin_path = path + files[1];
+            string origin_path = path + file_name[1];
 
             //Копировать в то же мето
             if (elements[3] == "here")
             {
-                string copy_path = path + files[3];
+                string copy_path = path + file_name[3];
 
                 functions.Copy(origin_path, copy_path);
                 Console.Clear();
@@ -111,7 +112,7 @@ class CommandsList: ICommandRecognition
             //Копировать в папку по указанному пути
             else if (elements[3] == "to")
             {
-                string copy_path = files[5] + files[3];
+                string copy_path = file_name[5] + file_name[3];
                 functions.Copy(origin_path, copy_path);
                 Console.Clear();
                 interaction.OutputTree(path, page);
@@ -121,14 +122,34 @@ class CommandsList: ICommandRecognition
         //Перенести
         else if (elements[0] == "transfer")
         {
-            string[] files = command.Split('"');
-            string origin_path = path + files[1];
-            string new_path = $@"{files[3]}\{files[1]}";
+            string origin_path = path + file_name[1];
+            string new_path = $@"{file_name[3]}\{file_name[1]}";
 
             functions.Transfer(origin_path, new_path);
             Console.Clear();
             interaction.OutputTree(path, page);
             interaction.InformationOutput(new_path);
+        }
+        //Поиск
+        else if(elements[0] == "find")
+        {
+            search.Area = path;
+            string? result = search.TrySearch(file_name[1], path);
+            if (result != null)
+            {
+                Console.Clear();
+                interaction.OutputTree(path, page);
+                interaction.InformationOutput(result);
+                interaction.SearchWindow(file_name[1], result);
+            }
+            else
+            {
+                Console.Clear();
+                interaction.OutputTree(path, page);
+                interaction.InformationOutput(path);
+                interaction.MessageOutput("По запросу ничего не найдено");
+            }
+            
         }
         else
         {

@@ -20,7 +20,6 @@ internal class CalculateSize: IReturnSize
     {
         if (Directory.Exists(path))
         {
-            //Кажется, придется написать рекурсию, которая будет считать все файды в папках
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             long result = GetSizeDirectory(directoryInfo);
             return result;

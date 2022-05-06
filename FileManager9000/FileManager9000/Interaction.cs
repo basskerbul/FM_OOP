@@ -104,6 +104,8 @@ class Interaction: IOutput, IInput
     }
     public void MessageOutput(string message)
     {
+        Console.WriteLine(up_frame);
+
         Console.WriteLine(format, message);
         Console.WriteLine(down_frame);
     }
@@ -117,7 +119,15 @@ class Interaction: IOutput, IInput
         Console.WriteLine(format, "copy \"file1\" \"file2\" here");
         Console.WriteLine(format, "copy \"file1\" \"file2\" to \"path\"");
         Console.WriteLine(format, "transfer \"name\" to \"path\"");
+        Console.WriteLine(format, "find \"folder/file\"");
         Console.WriteLine(format, "help");
+        Console.WriteLine(down_frame);
+    }
+    public void SearchWindow(string request, string result)
+    {
+        Console.WriteLine(up_frame);
+        Console.WriteLine(format, $"По запросу {request} был найден путь:");
+        Console.WriteLine(format, result);
         Console.WriteLine(down_frame);
     }
 }
