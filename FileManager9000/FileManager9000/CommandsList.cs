@@ -14,7 +14,6 @@ class CommandsList: ICommandRecognition
     private Search search = new Search();
     private string path;
     private int page;
-    
 
     public CommandsList(string path, int page)
     {

@@ -16,33 +16,25 @@ internal class Search : ISearch
         get { return area; }
         set { area = value; }
     }
-
+    
     public string? TrySearch(string substr, string area)
     {
-        DirectoryInfo di = new DirectoryInfo(area);
-        DirectoryInfo[] folders = di.GetDirectories();
-        FileInfo[] files = di.GetFiles();
         string? result = null;
-
-        foreach (DirectoryInfo folder in folders)
+        try
         {
-            if(folder.Name[0] == '$')
-                continue;
-
-            foreach (FileInfo file in files)
+            DirectoryInfo folders = new DirectoryInfo(area);
+            foreach (DirectoryInfo folder in folders.GetDirectories())
             {
-                if (substr.Contains(file.Name))
+                DirectoryInfo relative_path = new DirectoryInfo(Path.GetFullPath($@"C:{substr}"));
+                if (relative_path.Exists)
+                    return relative_path.FullName;
+                else
                 {
-                    return file.FullName;
+                    return TrySearch(substr, folder.FullName);
                 }
             }
-            if (substr.Contains(folder.Name))
-            {
-                return folder.FullName;
-            }
-            else { result = TrySearch(substr, folder.FullName); }
-
+            return result;
         }
-        return result;
+        catch { return null; }
     }
 }
